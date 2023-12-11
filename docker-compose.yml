@@ -1,0 +1,39 @@
+version: '3'
+services:
+  main:
+    image: postgres:latest
+    container_name: main_db
+    command: "postgres -c 'max_connections=500'"
+    ports:
+      - "5961:5432"
+    environment:
+      POSTGRES_PASSWORD: mainPass123
+      POSTGRES_DB: translate_cms_service
+  beaver:
+    image: postgres:latest
+    container_name: beaver
+    command: "postgres -c 'max_connections=500'"
+    ports:
+      - "5505:5432"
+    environment:
+      POSTGRES_PASSWORD: replicaPass123
+      POSTGRES_DB: translate_cms_service
+  racoon:
+    image: postgres:latest
+    container_name: racoon
+    command: "postgres -c 'max_connections=500'"
+    ports:
+      - "5105:5432"
+    environment:
+      POSTGRES_PASSWORD: racoonPass123
+      POSTGRES_DB: translate_cms_service
+
+#  replica_two:
+#    image: postgres:latest
+#    container_name: replica_two
+#    command: "postgres -c 'max_connections=500'"
+#    ports:
+#      - "5525:5432"
+#    environment:
+#      POSTGRES_PASSWORD: replicaTwoPass123
+#      POSTGRES_DB: arishem
